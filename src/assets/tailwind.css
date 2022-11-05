@@ -2,10 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
+body,
+html {
   height: 100%;
 }
 
-.bg-pattern-size{
-  background-size: 40% 100%;
+.bg-pattern-size {
+  background-size: 100% 20%;
+}
+
+.card {
+  background-size: contain;
+  height: 12rem;
+  width: 22rem;
+  margin: 0 3rem 0.3rem 0;
+}
+
+@media (min-width: 490px) {
+  .bg-pattern-size {
+    background-size: 40% 100%;
+  }
+
+  .card {
+    width: 447px;
+    height: 245px;
+  }
 }

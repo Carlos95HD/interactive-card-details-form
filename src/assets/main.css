@@ -510,6 +510,18 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.row-span-2 {
+  grid-row: span 2 / span 2;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
 .h-full {
   height: 100%;
 }
@@ -518,18 +530,86 @@ video {
   resize: both;
 }
 
-.bg-main {
+.grid-rows-4 {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.bg-main-desktop {
   background-image: url('./src/assets/images/bg-main-desktop.png');
+}
+
+.bg-main-mobile {
+  background-image: url('./src/assets/images/bg-main-mobile.png');
+}
+
+.bg-card-back {
+  background-image: url('./src/assets/images/bg-card-back.png');
+}
+
+.bg-card-front {
+  background-image: url('./src/assets/images/bg-card-front.png');
 }
 
 .bg-no-repeat {
   background-repeat: no-repeat;
 }
 
-body, html {
+.p-6 {
+  padding: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+body,
+html {
   height: 100%;
 }
 
-.bg-pattern-size{
-  background-size: 40% 100%;
+.bg-pattern-size {
+  background-size: 100% 20%;
+}
+
+.card {
+  background-size: contain;
+  height: 12rem;
+  width: 22rem;
+  margin: 0 3rem 0.3rem 0;
+}
+
+@media (min-width: 490px) {
+  .bg-pattern-size {
+    background-size: 40% 100%;
+  }
+
+  .card {
+    width: 447px;
+    height: 245px;
+  }
 }
