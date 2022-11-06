@@ -18,6 +18,10 @@ html {
   margin: 0 3rem 0.3rem 0;
 }
 
+.cvc{
+  margin: 0 3rem 0.3rem 0;
+}
+
 @media (min-width: 490px) {
   .bg-pattern-size {
     background-size: 40% 100%;
