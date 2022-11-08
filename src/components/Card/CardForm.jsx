@@ -14,22 +14,29 @@ const initialValues = {
   yy: "",
   cvc: "",
 };
-const required = "* Required";
+const required = "Can´t be blank";
 
 export const CardForm = () => {
   const { width } = useWindowDimensions();
   const [ccNumber, formatAndSetCcNumber] = useFormatAndSetCcNumber();
 
-  const cvcHandler = ({ target }) => {
-    setFieldValue("cvc", validatedValue(target, 3));
-  };
-
   const validationSchema = yup.object().shape({
-    cardName: yup.string().min(3, "Card name no valid").required(required),
+    cardName: yup
+      .string()
+      .trim()
+      .matches(/^[aA-zZ\s]+$/, "Is not in correct format")
+      .required(required)
+      .test( '', 'Is not in correct format' , value => value?.split(' ').length === 2 ),
     cardNumber: yup
       .string()
       .required(required)
-      .length(19, "16 characters required"),
+      .length(19, "16 numbers required"),
+    mm: yup
+      .string()
+      .required(required)
+      .length(2,'Two Number of digits required'),
+    yy: yup.string().required(required),
+    cvc: yup.string().required(required),
   });
 
   const onSubmit = () => {};
@@ -43,6 +50,20 @@ export const CardForm = () => {
     handleBlur,
     setFieldValue,
   } = formik;
+
+  const validationHandler = ({ target }) => {
+    switch (target.name) {
+      case "mm":
+        setFieldValue("mm", validatedValue(target, 2));
+        break;
+      case "yy":
+        setFieldValue("yy", validatedValue(target, 2));
+        break;
+      case "cvc":
+        setFieldValue("cvc", validatedValue(target, 3));
+        break;
+    }
+};
 
   useEffect(() => {
     setFieldValue("cardNumber", ccNumber);
@@ -69,6 +90,7 @@ export const CardForm = () => {
             }
             name="cardName"
             type="text"
+            maxLength={24}
             autoComplete="off"
             placeholder="e.g. Jane Appleseed"
             value={values.cardName}
@@ -117,7 +139,7 @@ export const CardForm = () => {
               autoComplete="off"
               placeholder="MM"
               value={values.mm}
-              onChange={handleChange}
+              onChange={validationHandler}
               onBlur={handleBlur}
             />
 
@@ -131,11 +153,11 @@ export const CardForm = () => {
               autoComplete="off"
               placeholder="YY"
               value={values.yy}
-              onChange={handleChange}
+              onChange={validationHandler}
               onBlur={handleBlur}
             />
 
-            {errors.yy && touched.yy && <div>{errors.yy}</div>}
+            { (errors.yy && touched.yy || errors.mm && touched.mm) && <div>{errors.yy}</div>}
           </div>
 
           <div>
@@ -152,9 +174,10 @@ export const CardForm = () => {
               autoComplete="off"
               placeholder="CVC"
               value={values.cvc}
-              onChange={cvcHandler}
+              onChange={validationHandler}
               onBlur={handleBlur}
             />
+            { errors.cvc && touched.cvc  && <div>{errors.yy}</div>}
           </div>
           <div>
             <button
