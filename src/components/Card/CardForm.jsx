@@ -1,57 +1,60 @@
+import { useEffect } from "react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { CardLogo } from "./CardLogo";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { FrontCard } from "./FrontCard";
+import { BackCard } from "./BackCard";
+import { useFormatAndSetCcNumber } from "../../hooks/useFormatAndSetCcNumber";
+import { validatedValue } from "../../helpers/validateInputValue";
+
+const initialValues = {
+  cardName: "",
+  cardNumber: "",
+  mm: "",
+  yy: "",
+  cvc: "",
+};
+const required = "* Required";
 
 export const CardForm = () => {
   const { width } = useWindowDimensions();
-  const initialValues = {
-    cardName: "",
-    cardNumber: "",
-    mm: "",
-    yy: "",
-    cvc: "",
+  const [ccNumber, formatAndSetCcNumber] = useFormatAndSetCcNumber();
+
+  const cvcHandler = ({ target }) => {
+    setFieldValue("cvc", validatedValue(target, 3));
   };
 
-  const required = "* Required";
   const validationSchema = yup.object().shape({
     cardName: yup.string().min(3, "Card name no valid").required(required),
     cardNumber: yup
       .string()
       .required(required)
-      .length(16, "16 characters required"),
+      .length(19, "16 characters required"),
   });
 
-  const onSubmit = () => {
-    // const { cardName, cardNumber } = values;
-  };
-
+  const onSubmit = () => {};
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
-  const { handleSubmit, handleChange, values, errors, touched, handleBlur } =
-    formik;
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    touched,
+    handleBlur,
+    setFieldValue,
+  } = formik;
+
+  useEffect(() => {
+    setFieldValue("cardNumber", ccNumber);
+  }, [ccNumber]);
 
   return (
     <div
       className={`bg-no-repeat bg-pattern-size h-full
       ${width > 490 ? "bg-main-desktop" : "bg-main-mobile"}`}
     >
-      <div className="bg-card-back bg-no-repeat card rounded-md text-white flex justify-end items-center">
-        <span className="cvc">000</span>
-      </div>
-
-      <div className="bg-card-front bg-no-repeat card rounded-md text-white">
-        <div className="grid grid-rows-4 h-full p-6">
-          <div className="row-span-2">
-            <CardLogo />
-          </div>
-          <span className="text-center font-semibold">0000 0000 0000 0000</span>
-
-          <div className="flex justify-between">
-            <span>Jane Appleseed</span>
-            <span>00/00</span>
-          </div>
-        </div>
-      </div>
+      <BackCard cvc={values.cvc} />
+      <FrontCard {...values} />
 
       {/* Form */}
       <form onSubmit={handleSubmit}>
@@ -86,11 +89,11 @@ export const CardForm = () => {
               "bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             }
             name="cardNumber"
-            type="number"
+            type="text"
             autoComplete="off"
             placeholder="e.g. 1234 5678 9123 0000"
-            value={values.cardNumber}
-            onChange={handleChange}
+            value={ccNumber}
+            onChange={formatAndSetCcNumber}
             onBlur={handleBlur}
           />
 
@@ -110,7 +113,7 @@ export const CardForm = () => {
                 "bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 w-16"
               }
               name="mm"
-              type="number"
+              type="text"
               autoComplete="off"
               placeholder="MM"
               value={values.mm}
@@ -124,7 +127,7 @@ export const CardForm = () => {
                 "bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 w-16"
               }
               name="yy"
-              type="number"
+              type="text"
               autoComplete="off"
               placeholder="YY"
               value={values.yy}
@@ -145,11 +148,11 @@ export const CardForm = () => {
                 "bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 w-16"
               }
               name="cvc"
-              type="number"
+              type="text"
               autoComplete="off"
               placeholder="CVC"
               value={values.cvc}
-              onChange={handleChange}
+              onChange={cvcHandler}
               onBlur={handleBlur}
             />
           </div>
