@@ -21,5 +21,5 @@ export const useFormatAndSetCcNumber = () => {
     setCcNumber(spacedNumber);
   };
 
-  return [ccNumber, formatAndSetCcNumber];
+  return [ccNumber, formatAndSetCcNumber, setCcNumber];
 };

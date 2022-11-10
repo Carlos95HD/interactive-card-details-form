@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-import * as yup from "yup";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { FrontCard } from "./FrontCard";
 import { BackCard } from "./BackCard";
 import { useFormatAndSetCcNumber } from "../../hooks/useFormatAndSetCcNumber";
 import { validatedValue } from "../../helpers/validateInputValue";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import * as yup from "yup";
 
 const initialValues = {
   cardName: "",
@@ -17,8 +17,9 @@ const initialValues = {
 const required = "Can´t be blank";
 
 export const CardForm = () => {
+  const [ formCompleted, setFormCompleted ] = useState(false);
+  const [ ccNumber, formatAndSetCcNumber, setCcNumber] = useFormatAndSetCcNumber();
   const { width } = useWindowDimensions();
-  const [ccNumber, formatAndSetCcNumber] = useFormatAndSetCcNumber();
 
   const validationSchema = yup.object().shape({
     cardName: yup
@@ -34,12 +35,21 @@ export const CardForm = () => {
     mm: yup
       .string()
       .required(required)
-      .length(2,'Two Number of digits required'),
-    yy: yup.string().required(required),
-    cvc: yup.string().required(required),
+      .length(2,'Two number of digits required'),
+    yy: yup.string().required(required).length(2,'Two number of digits required'),
+    cvc: yup.string().required(required).length(3,'Three number of digits required'),
   });
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    setFormCompleted(true);
+  };
+
+  const continueHander = () => {
+    setFormCompleted(false);
+    setCcNumber('')
+    resetForm();
+  };
+
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
   const {
     handleSubmit,
@@ -49,6 +59,8 @@ export const CardForm = () => {
     touched,
     handleBlur,
     setFieldValue,
+    isValid,
+    resetForm
   } = formik;
 
   const validationHandler = ({ target }) => {
@@ -77,7 +89,17 @@ export const CardForm = () => {
       <BackCard cvc={values.cvc} />
       <FrontCard {...values} />
 
-      {/* Form */}
+    { !formCompleted ?
+        <div>
+          <h1>thank you</h1>
+          <button
+            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            onClick={continueHander}
+          >
+            Continue
+          </button>
+        </div>
+      :
       <form onSubmit={handleSubmit}>
         <div>
           <label className="text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
@@ -181,6 +203,7 @@ export const CardForm = () => {
           </div>
           <div>
             <button
+              disabled={!isValid}
               type="submit"
               className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
             >
@@ -189,6 +212,8 @@ export const CardForm = () => {
           </div>
         </div>
       </form>
+    };
+
     </div>
   );
 };
