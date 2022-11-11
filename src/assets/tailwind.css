@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,21 +7,58 @@
 body,
 html {
   height: 100%;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .bg-pattern-size {
-  background-size: 100% 20%;
+  background-size: 100% 30%;
 }
 
 .card {
-  background-size: contain;
-  height: 12rem;
-  width: 22rem;
+  background-size: cover;
+  height: 9rem;
   margin: 0 3rem 0.3rem 0;
+  max-width: 262.5px;
+  width: 70%;
+}
+
+.back-card{
+  background-image: url('./images/bg-card-back.png');
+  left: 1.5rem;
+  position: relative;
+}
+
+.front-card {
+  background-image: url('./images/bg-card-front.png');
+  bottom: 4.2rem;
+  letter-spacing: 2px;
+  position: relative;
+  right: 2rem;
 }
 
 .cvc{
-  margin: 0 3rem 0.3rem 0;
+  margin: 0 2rem 0.4rem 0;
+}
+
+.input-color{
+  border-color: hsl(270, 3%, 87%);
+}
+
+.input-color:focus{
+  border: double 2px transparent;
+  border-radius: 4px;
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(to right, hsl(249, 99%, 64%), hsl(278, 94%, 30%));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.input-error {
+  border-color:hsl(0, 100%, 66%);
+}
+
+.text-error{
+  color: hsl(0, 100%, 66%);
 }
 
 @media (min-width: 490px) {

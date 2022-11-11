@@ -3,7 +3,7 @@ import { CardForm } from './components/Card/CardForm'
 
 function App() {
   return (
-    <div className='h-full'>
+    <div className='h-screen'>
       <CardForm />
       <Attribution />
     </div>
