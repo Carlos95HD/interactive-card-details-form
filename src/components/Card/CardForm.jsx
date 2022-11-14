@@ -7,6 +7,8 @@ import { validatedValue } from "../../helpers/validateInputValue";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import * as yup from "yup";
 
+import iconComplete from "../../assets/images/icon-complete.svg";
+
 const initialValues = {
   cardName: "",
   cardNumber: "",
@@ -92,10 +94,12 @@ export const CardForm = () => {
       </div>
 
     { formCompleted ?
-        <div>
-          <h1>thank you</h1>
+        <div className="mx-8 text-center flex flex-col items-center">
+          <img className="row-span-2 mb-10" src={iconComplete} />
+          <h3 className="text-3xl font-medium tracking-wide">THANK YOU!</h3>
+          <p className="my-5 font-medium text-gray-violet">We've added your card details</p>
           <button
-            className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            className="btn-dark-violet mt-4 shadow focus:shadow-outline focus:outline-none py-3 px-4 rounded-md w-full"
             onClick={continueHander}
           >
             Continue
@@ -104,13 +108,12 @@ export const CardForm = () => {
       :
       <form onSubmit={handleSubmit} className="flex flex-col mx-8 md:gap-6">
         <div className="flex flex-col">
-          <label className="font-medium text-gray-500 mb-1 md:text-right md:mb-0 pr-4">
+          <label className="font-medium text-xs mb-1 md:text-right md:mb-0 pr-4">
             CARDHOLDER NAME
           </label>
           <input
             className={
-              // (errors.cardName && touched.cardName ? "error" : "") +
-              "appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              (errors.cardName && touched.cardName ? "input-error " : "input-color ") + "appearance-none border rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
             }
             name="cardName"
             type="text"
@@ -126,12 +129,12 @@ export const CardForm = () => {
         </div>
 
         <div className="flex flex-col mt-6">
-          <label className="font-medium text-gray-500 mb-1">
+          <label className="font-medium text-xs mb-1">
             CARD NUMBER
           </label>
           <input
             className={
-              (errors.cardNumber && touched.cardNumber ? "input-error " : "input-color ") + "appearance-none border-2 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+              (errors.cardNumber && touched.cardNumber ? "input-error " : "input-color ") + "appearance-none border rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
             }
             name="cardNumber"
             type="text"
@@ -150,7 +153,7 @@ export const CardForm = () => {
         <div className="flex mt-6 ">
           <div className="flex-1">
             <div className="mb-1">
-              <label className="font-medium text-gray-500 ">
+              <label className="font-medium text-xs ">
                 EXP. DATE(MM/YY)
               </label>
             </div>
@@ -158,8 +161,8 @@ export const CardForm = () => {
             <div className="flex">
               <input
                 className={
-                  // (errors.mm && touched.mm ? "error" : "") +
-                  "mr-2 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 w-16"
+                  (errors.mm && touched.mm ? "input-error " : "input-color ") +
+                  "mr-2 appearance-none border border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white w-16"
                 }
                 name="mm"
                 type="text"
@@ -171,8 +174,8 @@ export const CardForm = () => {
               />
               <input
                 className={
-                  // (errors.yy && touched.yy ? "error" : "") +
-                  "appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 w-16"
+                  (errors.yy && touched.yy ? "input-error " : "input-color ") +
+                  "appearance-none border border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white w-16"
                 }
                 name="yy"
                 type="text"
@@ -184,17 +187,17 @@ export const CardForm = () => {
               />
             </div>
 
-            { (errors.yy && touched.yy || errors.mm && touched.mm) && <div class='text-error'>{errors.yy}</div>}
+            { (errors.yy && touched.yy || errors.mm && touched.mm) && <div class='text-error'>{errors.yy ? errors.yy : errors.mm }</div>}
           </div>
 
           <div className="flex flex-col flex-1">
-            <label className="font-medium text-gray-500 mb-1 md:text-right pr-4 w-16">
+            <label className="font-medium text-xs mt-2 mb-1 md:text-right pr-4 w-16">
               CVC
             </label>
             <input
               className={
-                // (errors.cvc && touched.cvc ? "error" : "") +
-                "appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 w-full"
+                (errors.cvc && touched.cvc ? "input-error " : "input-color ") +
+                "appearance-none border border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white w-full"
               }
               name="cvc"
               type="text"
@@ -209,9 +212,8 @@ export const CardForm = () => {
         </div>
         <div>
           <button
-            disabled={!isValid}
             type="submit"
-            className="mt-4 shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded w-full"
+            className="btn-dark-violet mt-4 shadow focus:shadow-outline focus:outline-none py-3 px-4 rounded-md w-full"
           >
             Confirm
           </button>

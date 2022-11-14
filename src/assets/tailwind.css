@@ -4,10 +4,32 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  /* ### Primary */
+  --linear-gradient: hsl(249, 99%, 64%) to hsl(278, 94%, 30%);
+  --red: hsl(0, 100%, 66%);
+
+  /* ### Neutral */
+  --white: hsl(0, 0%, 100%);
+  --light-grayish-violet: hsl(270, 3%, 87%);
+  --dark-grayish-violet: hsl(279, 6%, 55%);
+  --very-dark-violet: hsl(278, 68%, 11%);
+
+  /*========== Font and typography ==========*/
+  --body-font: 'Space Grotesk', sans-serif;
+}
+
+
 body,
 html {
   height: 100%;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--body-font);
+  background-color: var(--white);
+}
+
+label{
+  color: var(--very-dark-violet);
+  letter-spacing: 1px;
 }
 
 .bg-pattern-size {
@@ -37,28 +59,37 @@ html {
 }
 
 .cvc{
-  margin: 0 2rem 0.4rem 0;
+  margin: 0 2rem 0.1rem 0;
 }
 
 .input-color{
-  border-color: hsl(270, 3%, 87%);
+  border-color: var(--light-grayish-violet);
 }
 
 .input-color:focus{
-  border: double 2px transparent;
+  border: double 1px transparent;
   border-radius: 4px;
-  background-image: linear-gradient(white, white), 
+  background-image: linear-gradient(var(--white), var(--white)), 
                     linear-gradient(to right, hsl(249, 99%, 64%), hsl(278, 94%, 30%));
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
 
 .input-error {
-  border-color:hsl(0, 100%, 66%);
+  border-color:var(--red);
 }
 
 .text-error{
-  color: hsl(0, 100%, 66%);
+  color: var(--red);
+}
+
+.text-gray-violet{
+  color: var(--dark-grayish-violet);
+}
+
+.btn-dark-violet{
+  background-color: var(--very-dark-violet);
+  color: var(--white);
 }
 
 @media (min-width: 490px) {
