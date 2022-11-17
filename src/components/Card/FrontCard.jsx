@@ -2,8 +2,7 @@ import cardImg from "../../assets/images/card-logo.svg";
 
 export const FrontCard = ({ cardName, cardNumber, mm, yy }) => {
   return (
-    <div className="card front-card bg-no-repeat  rounded-md text-white">
-      <div className="grid grid-rows-4 h-full p-4">
+      <div className="card front-card bg-no-repeat rounded-md text-white grid grid-rows-4 h-full p-4">
         <img className="row-span-2 w-12"src={cardImg} />
         <span className="font-medium">
           {cardNumber ? cardNumber : "0000 0000 0000 0000"}
@@ -16,6 +15,5 @@ export const FrontCard = ({ cardName, cardNumber, mm, yy }) => {
           </span>
         </div>
       </div>
-    </div>
   );
 };
