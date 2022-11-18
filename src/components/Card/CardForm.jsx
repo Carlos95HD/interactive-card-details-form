@@ -4,7 +4,6 @@ import { FrontCard } from "./FrontCard";
 import { BackCard } from "./BackCard";
 import { useFormatAndSetCcNumber } from "../../hooks/useFormatAndSetCcNumber";
 import { validatedValue } from "../../helpers/validateInputValue";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
 import * as yup from "yup";
 
 import iconComplete from "../../assets/images/icon-complete.svg";
@@ -21,7 +20,6 @@ const required = "Can´t be blank";
 export const CardForm = () => {
   const [ formCompleted, setFormCompleted ] = useState(false);
   const [ ccNumber, formatAndSetCcNumber, setCcNumber] = useFormatAndSetCcNumber();
-  const { width } = useWindowDimensions();
 
   const validationSchema = yup.object().shape({
     cardName: yup
@@ -84,17 +82,14 @@ export const CardForm = () => {
   }, [ccNumber]);
 
   return (
-    <div
-      className={`bg-no-repeat bg-pattern-size h-full md:grid grid-cols-2 md:content-center
-      ${width > 490 ? "bg-main-desktop" : "bg-main-mobile"}`}
-    >
+    <div className="h-full md:grid grid-cols-2 md:content-center sm:mx-auto sm:w-2/3 md:w-full">
       <div className="w-full h-72 pt-6 grid place-items-end md:flex md:flex-col md:h-full md:pt-0 md:place-items-end">
         <BackCard cvc={values.cvc} />
         <FrontCard {...values} />
       </div>
 
     { formCompleted ?
-        <div className="mx-8 text-center flex flex-col items-center ">
+        <div className="mx-8 text-center flex flex-col items-center md:justify-center md:w-1/2 md:mx-auto">
           <img className="row-span-2 mb-10" src={iconComplete} />
           <h3 className="text-3xl font-medium tracking-wide">THANK YOU!</h3>
           <p className="my-5 font-medium text-gray-violet">We've added your card details</p>
@@ -106,8 +101,8 @@ export const CardForm = () => {
           </button>
         </div>
       :
-      <form onSubmit={handleSubmit} className="w-full">
-        <div className="flex flex-col mx-8 md:gap-6">
+      <form onSubmit={handleSubmit} className="w-full md:flex md:justify-center">
+        <div className="flex flex-col mx-8 md:gap-6 md:justify-center md:w-9/12 lg:w-1/2">
           <div className="flex flex-col">
             <label className="font-medium text-xs mb-1 md:mb-0 pr-4">
               CARDHOLDER NAME

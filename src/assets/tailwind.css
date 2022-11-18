@@ -21,7 +21,8 @@
 
 
 body,
-html {
+html,
+#root {
   height: 100%;
   font-family: var(--body-font);
   background-color: var(--white);
@@ -99,9 +100,9 @@ label{
 
   .card {
     background-size: contain;
-    width: 23rem;
-    height: 13rem;
-    margin: 0 3rem 0.3rem 0;
+    width: 20rem;
+    height: 11rem;
+    margin: 1rem 0;
     max-width: none;
   }
   
@@ -116,6 +117,22 @@ label{
     bottom: 0rem;
     letter-spacing: 2px;
     position: relative;
-    right: 0rem;
+    right: 3.5rem;
+  }
+
+  .cvc{
+    margin: 0 2.5rem 0.1rem 0;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .card {
+    width: 24.5rem;
+    height: 13.5rem;
+  }
+
+  .cvc{
+    margin: 0 3rem 0.1rem 0;
   }
 }
