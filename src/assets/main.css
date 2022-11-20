@@ -526,6 +526,18 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.ml-2{
+  margin-left: 0.5rem;
+}
+
+.mb-2{
+  margin-bottom: 0.5rem;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
+}
+
 .mb-10{
   margin-bottom: 2.5rem;
 }
@@ -620,6 +632,10 @@ video {
   justify-content: space-between;
 }
 
+.gap-2{
+  gap: 0.5rem;
+}
+
 .rounded-md{
   border-radius: 0.375rem;
 }
@@ -684,14 +700,14 @@ video {
   text-align: center;
 }
 
-.text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-\[9px\]{
@@ -704,6 +720,10 @@ video {
 
 .leading-tight{
   line-height: 1.25;
+}
+
+.tracking-widest{
+  letter-spacing: 0.1em;
 }
 
 .tracking-wide{
@@ -720,13 +740,24 @@ video {
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
+.underline{
+  text-decoration-line: underline;
+}
+
 .shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.backdrop-blur-sm{
+  --tw-backdrop-blur: blur(4px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+          backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
 :root{
+  /* ### Global Styles */
   /* ### Primary */
   --linear-gradient: hsl(249, 99%, 64%) to hsl(278, 94%, 30%);
   --red: hsl(0, 100%, 66%);
@@ -740,11 +771,15 @@ video {
 }
 
 body,
-html,
-#root {
+html {
   height: 100%;
   font-family: var(--body-font);
   background-color: var(--white);
+}
+
+#root{
+  height: 100%;
+  min-height: 690px;
 }
 
 label{
@@ -812,6 +847,44 @@ label{
   color: var(--white);
 }
 
+/* ############### Popup styles ################### */
+
+.popup-content {
+  margin: auto;
+  background: var(--white);
+  width: 50%;
+  padding: 10px;
+  border: 1px solid var(--dark-grayish-violet);
+  opacity: 0.7;
+}
+
+.popup-arrow {
+  color: var(--white);
+}
+
+[role='tooltip'].popup-content {
+  width: 50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-popup='tooltip'].popup-overlay {
+  background: transparent;
+}
+
+@media (min-width: 640px) {
+  .popup-content {
+    opacity: 0.4;
+  }
+
+  [role='tooltip'].popup-content {
+    width: 200px;
+  }
+}
+
 @media (min-width: 768px) {
   .bg-pattern-size {
     background-size: 40% 100%;
@@ -840,7 +913,7 @@ label{
   }
 
   .cvc{
-    margin: 0 2.5rem 0.1rem 0;
+    margin: 0 2.5rem 0.4rem 0;
   }
 }
 
@@ -851,7 +924,7 @@ label{
   }
 
   .cvc{
-    margin: 0 3rem 0.1rem 0;
+    margin: 0 3rem 0.4rem 0;
   }
 }
 
@@ -873,6 +946,10 @@ label{
 
   .sm\:w-2\/3{
     width: 66.666667%;
+  }
+
+  .sm\:flex-row{
+    flex-direction: row;
   }
 }
 
@@ -906,12 +983,12 @@ label{
     width: 100%;
   }
 
-  .md\:w-1\/2{
-    width: 50%;
-  }
-
   .md\:w-9\/12{
     width: 75%;
+  }
+
+  .md\:w-16{
+    width: 4rem;
   }
 
   .md\:flex-col{
@@ -930,21 +1007,71 @@ label{
     justify-content: center;
   }
 
-  .md\:gap-6{
-    gap: 1.5rem;
+  .md\:gap-4{
+    gap: 1rem;
   }
 
   .md\:pt-0{
     padding-top: 0px;
   }
 
+  .md\:text-left{
+    text-align: left;
+  }
+
   .md\:text-right{
     text-align: right;
+  }
+
+  .md\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .md\:font-bold{
+    font-weight: 700;
+  }
+
+  .md\:font-normal{
+    font-weight: 400;
   }
 }
 
 @media (min-width: 1024px){
   .lg\:w-1\/2{
     width: 50%;
+  }
+
+  .lg\:items-end{
+    align-items: flex-end;
+  }
+
+  .lg\:p-7{
+    padding: 1.75rem;
+  }
+
+  .lg\:align-text-bottom{
+    vertical-align: text-bottom;
+  }
+
+  .lg\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .lg\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 1280px){
+  .xl\:w-3\/4{
+    width: 75%;
   }
 }
