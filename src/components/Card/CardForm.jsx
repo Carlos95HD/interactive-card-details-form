@@ -82,19 +82,19 @@ export const CardForm = () => {
   }, [ccNumber]);
 
   return (
-    <div className="h-full md:grid grid-cols-2 md:content-center sm:mx-auto sm:w-2/3 md:w-full">
+    <div className="h-full md:grid grid-cols-2 md:content-center sm:mx-auto sm:w-2/3 md:w-full mb-4">
       <div className="w-full h-72 pt-6 grid place-items-end md:flex md:flex-col md:h-full md:pt-0 md:place-items-end">
         <BackCard cvc={values.cvc} />
         <FrontCard {...values} />
       </div>
 
     { formCompleted ?
-        <div className="mx-8 text-center flex flex-col items-center md:justify-center md:w-1/2 md:mx-auto">
+        <div className="mx-8 text-center flex flex-col items-center md:justify-center md:w-9/12 md:mx-auto lg:w-1/2">
           <img className="row-span-2 mb-10" src={iconComplete} />
           <h3 className="text-3xl font-medium tracking-wide">THANK YOU!</h3>
           <p className="my-5 font-medium text-gray-violet">We've added your card details</p>
           <button
-            className="btn-dark-violet mt-4 shadow focus:shadow-outline focus:outline-none py-3 px-4 rounded-md w-full"
+            className="btn-dark-violet mt-4 shadow focus:shadow-outline focus:outline-none py-3 px-4 rounded-md w-full xl:w-3/4"
             onClick={continueHander}
           >
             Continue
@@ -102,9 +102,9 @@ export const CardForm = () => {
         </div>
       :
       <form onSubmit={handleSubmit} className="w-full md:flex md:justify-center">
-        <div className="flex flex-col mx-8 md:gap-6 md:justify-center md:w-9/12 lg:w-1/2">
+        <div className="flex flex-col mx-8 md:gap-4 md:justify-center md:w-9/12 lg:w-1/2">
           <div className="flex flex-col">
-            <label className="font-medium text-xs mb-1 md:mb-0 pr-4">
+            <label className="font-medium md:font-bold text-xs mb-1 md:mb-0 pr-4">
               CARDHOLDER NAME
             </label>
             <input
@@ -125,7 +125,7 @@ export const CardForm = () => {
           </div>
 
           <div className="flex flex-col mt-6">
-            <label className="font-medium text-xs mb-1">
+            <label className="font-medium md:font-bold text-xs mb-1">
               CARD NUMBER
             </label>
             <input
@@ -149,7 +149,7 @@ export const CardForm = () => {
           <div className="flex mt-6 ">
             <div className="flex-1">
               <div className="mb-1">
-                <label className="font-medium text-xs ">
+                <label className="font-medium text-xs md:font-bold">
                   EXP. DATE(MM/YY)
                 </label>
               </div>
@@ -187,7 +187,7 @@ export const CardForm = () => {
             </div>
 
             <div className="flex flex-col flex-1">
-              <label className="font-medium text-xs mt-2 mb-1 md:text-right pr-4 w-16">
+              <label className="font-medium text-xs mt-2 mb-1 md:text-right pr-4 w-16 md:font-bold">
                 CVC
               </label>
               <input
@@ -216,7 +216,6 @@ export const CardForm = () => {
           </div>
         </div>
       </form>
-
     }
 
     </div>
