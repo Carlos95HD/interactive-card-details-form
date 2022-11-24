@@ -1,5 +1,5 @@
 import { Attribution } from './components/Attribution'
-import { CardForm } from './components/Card/CardForm'
+import { CCForm } from './components/CCForm'
 import useWindowDimensions from './hooks/useWindowDimensions';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className={`flex flex-col bg-no-repeat bg-pattern-size h-full ${width > 490 ? "bg-main-desktop" : "bg-main-mobile"}`} >
-      <CardForm />
+      <CCForm />
       <Attribution />
     </div>
   )

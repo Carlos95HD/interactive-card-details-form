@@ -516,6 +516,11 @@ video {
   grid-row: span 2 / span 2;
 }
 
+.my-8{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .mx-8{
   margin-left: 2rem;
   margin-right: 2rem;
@@ -528,10 +533,6 @@ video {
 
 .ml-2{
   margin-left: 0.5rem;
-}
-
-.mb-2{
-  margin-bottom: 0.5rem;
 }
 
 .mb-4{
@@ -632,8 +633,16 @@ video {
   justify-content: space-between;
 }
 
+.gap-1{
+  gap: 0.25rem;
+}
+
 .gap-2{
   gap: 0.5rem;
+}
+
+.gap-3{
+  gap: 0.75rem;
 }
 
 .rounded-md{
@@ -722,22 +731,22 @@ video {
   line-height: 1.25;
 }
 
-.tracking-widest{
-  letter-spacing: 0.1em;
-}
-
 .tracking-wide{
   letter-spacing: 0.025em;
 }
 
-.text-white{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
+.tracking-widest{
+  letter-spacing: 0.1em;
 }
 
 .text-gray-700{
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .underline{
@@ -775,6 +784,7 @@ html {
   height: 100%;
   font-family: var(--body-font);
   background-color: var(--white);
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
 
 #root{
@@ -855,7 +865,7 @@ label{
   width: 50%;
   padding: 10px;
   border: 1px solid var(--dark-grayish-violet);
-  opacity: 0.7;
+  -webkit-animation: 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards anvil;
 }
 
 .popup-arrow {
@@ -863,7 +873,7 @@ label{
 }
 
 [role='tooltip'].popup-content {
-  width: 50px;
+  width: auto;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
 }
 
@@ -875,13 +885,45 @@ label{
   background: transparent;
 }
 
+@keyframes anvil {
+  from {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* ############### End Popup styles ################### */
+
+/* ############### Hover Animation ################### */
+
+/* Animación solo para dispositivos con cursor */
+
+@media (hover: hover) and (pointer: fine) {
+  .hvr-float {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+    transition-timing-function: ease-out;
+  }
+
+  .hvr-float:hover {
+    transform: translateY(-8px);
+  }
+}
+
+/* ############### End Hover Animation ################### */
+
 @media (min-width: 640px) {
   .popup-content {
     opacity: 0.4;
-  }
-
-  [role='tooltip'].popup-content {
-    width: 200px;
   }
 }
 
@@ -961,6 +1003,10 @@ label{
   .md\:mx-auto{
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .md\:mb-2{
+    margin-bottom: 0.5rem;
   }
 
   .md\:mb-0{

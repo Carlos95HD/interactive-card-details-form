@@ -1,48 +1,16 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { FrontCard } from "./FrontCard";
-import { BackCard } from "./BackCard";
-import { useFormatAndSetCcNumber } from "../../hooks/useFormatAndSetCcNumber";
-import { validatedValue } from "../../helpers/validateInputValue";
-import * as yup from "yup";
+import { FrontCard } from "./Card/FrontCard";
+import { BackCard } from "./Card/BackCard";
+import { useFormatAndSetCcNumber } from "../hooks/useFormatAndSetCcNumber";
+import { validatedValue } from "../helpers/validateInputValue";
+import { initialValues, validationSchema } from "./formConfig";
 
-import iconComplete from "../../assets/images/icon-complete.svg";
+import iconComplete from "../assets/images/icon-complete.svg";
 
-const initialValues = {
-  cardName: "",
-  cardNumber: "",
-  mm: "",
-  yy: "",
-  cvc: "",
-};
-const required = "Can´t be blank";
-
-export const CardForm = () => {
+export const CCForm = () => {
   const [ formCompleted, setFormCompleted ] = useState(false);
   const [ ccNumber, formatAndSetCcNumber, setCcNumber] = useFormatAndSetCcNumber();
-
-  const validationSchema = yup.object().shape({
-    cardName: yup
-      .string()
-      .trim()
-      .matches(/^[aA-zZ\s]+$/, "Is not in correct format")
-      .required(required)
-      .test( '', 'Is not in correct format' , value => value?.split(' ').length === 2 ),
-    cardNumber: yup
-      .string()
-      .required(required)
-      .length(19, "16 numbers required"),
-    mm: yup
-      .string()
-      .required(required)
-      .length(2,'Two number of digits required'),
-    yy: yup.string().required(required).length(2,'Two number of digits required'),
-    cvc: yup.string().required(required).length(3,'Three number of digits required'),
-  });
-
-  const onSubmit = () => {
-    setFormCompleted(true);
-  };
 
   const continueHander = () => {
     setFormCompleted(false);
@@ -50,7 +18,12 @@ export const CardForm = () => {
     resetForm();
   };
 
+  const onSubmit = () => {
+    setFormCompleted(true);
+  };
+  
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
+
   const {
     handleSubmit,
     handleChange,
@@ -59,7 +32,6 @@ export const CardForm = () => {
     touched,
     handleBlur,
     setFieldValue,
-    isValid,
     resetForm
   } = formik;
 
@@ -89,19 +61,21 @@ export const CardForm = () => {
       </div>
 
     { formCompleted ?
-        <div className="mx-8 text-center flex flex-col items-center md:justify-center md:w-9/12 md:mx-auto lg:w-1/2">
-          <img className="row-span-2 mb-10" src={iconComplete} />
+      <div className="mx-8 text-center flex flex-col items-center md:justify-center md:w-9/12 md:mx-auto lg:w-1/2">
+        <img className="row-span-2 mb-10 animate__animated animate__rotateIn" src={iconComplete} />
+        <div className="animate__animated animate__bounceIn">
           <h3 className="text-3xl font-medium tracking-wide">THANK YOU!</h3>
           <p className="my-5 font-medium text-gray-violet">We've added your card details</p>
-          <button
-            className="btn-dark-violet mt-4 shadow focus:shadow-outline focus:outline-none py-3 px-4 rounded-md w-full xl:w-3/4"
-            onClick={continueHander}
-          >
-            Continue
-          </button>
         </div>
+        <button
+          className="btn-dark-violet mt-4 shadow focus:shadow-outline focus:outline-none py-3 px-4 rounded-md w-full xl:w-3/4 animate__animated animate__fadeIn"
+          onClick={continueHander}
+        >
+          Continue
+        </button>
+      </div>
       :
-      <form onSubmit={handleSubmit} className="w-full md:flex md:justify-center">
+      <form onSubmit={handleSubmit} className="w-full md:flex md:justify-center animate__animated animate__fadeIn">
         <div className="flex flex-col mx-8 md:gap-4 md:justify-center md:w-9/12 lg:w-1/2">
           <div className="flex flex-col">
             <label className="font-medium md:font-bold text-xs mb-1 md:mb-0 pr-4">
@@ -121,7 +95,7 @@ export const CardForm = () => {
               onBlur={handleBlur}
             />
 
-            {errors.cardName && touched.cardName && <div class='text-error'>{errors.cardName}</div>}
+            {errors.cardName && touched.cardName && <div className='text-error'>{errors.cardName}</div>}
           </div>
 
           <div className="flex flex-col mt-6">
@@ -183,7 +157,7 @@ export const CardForm = () => {
                 />
               </div>
 
-              { (errors.yy && touched.yy || errors.mm && touched.mm) && <div class='text-error'>{errors.yy ? errors.yy : errors.mm }</div>}
+              { (errors.yy && touched.yy || errors.mm && touched.mm) && <div className='text-error'>{errors.yy ? errors.yy : errors.mm }</div>}
             </div>
 
             <div className="flex flex-col flex-1">
@@ -203,7 +177,7 @@ export const CardForm = () => {
                 onChange={validationHandler}
                 onBlur={handleBlur}
               />
-              { (errors.cvc && touched.cvc) && <div class='text-error'>{errors.cvc}</div>}
+              { (errors.cvc && touched.cvc) && <div className='text-error'>{errors.cvc}</div>}
             </div>
           </div>
           <div>

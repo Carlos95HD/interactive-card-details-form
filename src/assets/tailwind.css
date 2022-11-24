@@ -28,6 +28,7 @@ html {
   height: 100%;
   font-family: var(--body-font);
   background-color: var(--white);
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 }
 
 #root{
@@ -107,14 +108,15 @@ label{
   width: 50%;
   padding: 10px;
   border: 1px solid var(--dark-grayish-violet);
-  opacity: 0.7;
+  -webkit-animation: 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards anvil;
 }
+
 .popup-arrow {
   color: var(--white);
 }
 
 [role='tooltip'].popup-content {
-  width: 50px;
+  width: auto;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
 }
 
@@ -126,13 +128,44 @@ label{
   background: transparent;
 }
 
+@keyframes anvil {
+  from {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+/* ############### End Popup styles ################### */
+
+/* ############### Hover Animation ################### */
+/* Animación solo para dispositivos con cursor */
+@media (hover: hover) and (pointer: fine) {
+  .hvr-float {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .hvr-float:hover {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+/* ############### End Hover Animation ################### */
+
 @media (min-width: 640px) {
   .popup-content {
     opacity: 0.4;
-  }
-
-  [role='tooltip'].popup-content {
-    width: 200px;
   }
 }
 
