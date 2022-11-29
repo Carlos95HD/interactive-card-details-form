@@ -161,7 +161,7 @@ export const CCForm = () => {
             </div>
 
             <div className="flex flex-col flex-1">
-              <label className="font-medium text-xs mt-2 mb-1 md:text-right pr-4 w-16 md:font-bold">
+              <label className="font-medium text-xs mt-2 mb-1 pr-4 w-16 md:font-bold">
                 CVC
               </label>
               <input
