@@ -563,6 +563,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.mb-2{
+  margin-bottom: 0.5rem;
+}
+
 .flex{
   display: flex;
 }
@@ -633,14 +637,6 @@ video {
   justify-content: space-between;
 }
 
-.gap-1{
-  gap: 0.25rem;
-}
-
-.gap-2{
-  gap: 0.5rem;
-}
-
 .gap-3{
   gap: 0.75rem;
 }
@@ -664,14 +660,6 @@ video {
 
 .bg-transparent{
   background-color: transparent;
-}
-
-.bg-main-desktop{
-  background-image: url('./src/assets/images/bg-main-desktop.png');
-}
-
-.bg-main-mobile{
-  background-image: url('./src/assets/images/bg-main-mobile.png');
 }
 
 .bg-no-repeat{
@@ -795,6 +783,14 @@ html {
 label{
   color: var(--very-dark-violet);
   letter-spacing: 1px;
+}
+
+.bg-desktop{
+  background-image: url('./images/bg-main-desktop.png');
+}
+
+.bg-mobile{
+  background-image: url('./images/bg-main-mobile.png');
 }
 
 .bg-pattern-size {

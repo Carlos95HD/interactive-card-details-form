@@ -77,8 +77,8 @@ export const CCForm = () => {
       :
       <form onSubmit={handleSubmit} className="w-full md:flex md:justify-center animate__animated animate__fadeIn">
         <div className="flex flex-col mx-8 md:gap-4 md:justify-center md:w-9/12 lg:w-1/2">
-          <div className="flex flex-col">
-            <label className="font-medium md:font-bold text-xs mb-1 md:mb-0 pr-4">
+          <div className="flex flex-col mt-6">
+            <label className="font-medium md:font-bold text-xs mb-1 pr-4">
               CARDHOLDER NAME
             </label>
             <input

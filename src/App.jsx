@@ -6,7 +6,7 @@ function App() {
   const { width } = useWindowDimensions();
 
   return (
-    <div className={`flex flex-col bg-no-repeat bg-pattern-size h-full ${width > 490 ? "bg-main-desktop" : "bg-main-mobile"}`} >
+    <div className={`flex flex-col bg-no-repeat bg-pattern-size h-full ${width > 490 ? "bg-desktop" : "bg-mobile"}`} >
       <CCForm />
       <Attribution />
     </div>

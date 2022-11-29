@@ -41,6 +41,14 @@ label{
   letter-spacing: 1px;
 }
 
+.bg-desktop{
+  background-image: url('./images/bg-main-desktop.png');
+}
+
+.bg-mobile{
+  background-image: url('./images/bg-main-mobile.png');
+}
+
 .bg-pattern-size {
   background-size: 100% 30%;
 }
